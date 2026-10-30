@@ -6,12 +6,21 @@
 
 저장소 이름은 `control`이다. Clone/다운로드한 뒤 [start.md](start.md)의 실제 경로를 읽으라고 요청한다. 작업 폴더(TASK)와 스킬 폴더(KIT)를 구분하고, 스킬 파일을 결과물에 포함할지는 프로젝트의 패키징 기준을 따른다. 자동 Skill 검색 경로에 설치하지 않았어도 파일을 직접 읽혀 적용할 수 있다. 설치된 스킬의 호출명은 `$control`이다.
 
+Codex용 진입 지침은 [AGENTS.md](AGENTS.md)다. Codex는 시작할 때 프로젝트 루트부터 현재 작업 디렉터리까지의 지침을 찾으므로, TASK 아래 `control/` 또는 `.agent/control/`에 clone한 파일이 상위 TASK에 자동 적용되지는 않는다. 실행 중 clone했다면 아래처럼 실제 경로를 읽도록 요청한다. `start.md`가 `AGENTS.md`와 `SKILL.md`를 함께 연결한다. ([공식 동작 설명](https://learn.chatgpt.com/docs/agent-configuration/agents-md))
+
+```text
+현재 작업 폴더가 작업 대상이야. .agent/control/start.md를 읽고 적용해서 시작해.
+```
+
+위 경로는 실제 clone 위치에 맞춘다. 새 대화에서도 같은 시작 요청으로 적용할 수 있다. 매번 자동 적용하도록 연결하려면 수정이 허용된 TASK의 기존 `AGENTS.md`에 실제 KIT 경로를 읽는 지침을 추가하고, 기존 내용은 보존한다. Control의 `AGENTS.md`를 TASK 루트에 그대로 복사하면 상대 경로가 달라지므로 통째로 덮어쓰지 않는다.
+
 첫 응답은 문제·목표·제약, 전체 구조와 대안, 완료까지의 작업 계획, 검증·담당자 질문, 추천하는 첫 작업 범위를 제안한다. 사용자가 범위를 정하면 그 안에서 구현·검증한다. 이후 매 대화에서 새 정보와 현재 계획을 대조해 유지 또는 수정 이유와 다음 행동을 알린다. 이미 승인한 작업을 재개할 때 같은 승인을 반복해서 요구하지 않는다.
 
 담당자와의 첫 대화는 **"어떤 정보를 답해 주실 수 있나요?"**로 시작한다. 작은 확인 질문을 허용하고, Codex는 실제 답을 받을 때마다 새로 알게 된 점과 남은 궁금증을 정리해 후속 질문을 제안한다. 사례·판단 과정·예외로 대화를 발전시키며, 이미 답한 질문을 반복하거나 해결책·설계를 통째로 요구하지 않는다.
 
 핵심 파일:
 
+- [AGENTS.md](AGENTS.md): Codex 진입 지침, TASK/KIT 구분과 핵심 작업 규칙.
 - [start.md](start.md): 첫 분석과 전체 계획, 범위 결정.
 - [SKILL.md](skills/control/SKILL.md): 작업 권한, 구현·검증·계획 갱신, 상황별 참조.
 - [structure.md](skills/control/references/structure.md): 작업에 맞는 구조·대안·작업 분해.
