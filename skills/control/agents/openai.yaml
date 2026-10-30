@@ -1,0 +1,4 @@
+interface:
+  display_name: "Control"
+  short_description: "개발·분석 작업의 전체 설계·계획 갱신·질문·검증·AI 결정 이해"
+  default_prompt: "$control 작업을 읽고 전체 설계·작업 흐름·검증·담당자 질문과 첫 범위를 제안해줘. 범위 결정 후 구현하고 매 대화에서 계획을 점검해줘."
